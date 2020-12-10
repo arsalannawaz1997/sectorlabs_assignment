@@ -1,22 +1,22 @@
 <div class="container">
   <div class="text-center">
     <button class="btn btn-primary">
-      <a [routerLink]="['/clients/form']">Add new Client</a>
+      <a [routerLink]="['/clients/form']" class="create-client-btn">Add new Client</a>
     </button>
   </div>
 </div>
 <table *ngIf="clients.length !== 0" class="table">
   <thead>
     <tr>
-      <th scope="col" class="text-right">#</th>
-      <th scope="col" class="text-center">Type</th>
-      <th scope="col">Brand</th>
+      <th scope="col" class="text-left">#</th>
       <th scope="col">Name</th>
-      <th scope="col" class="text-right">Price</th>
-      <th scope="col" class="text-right">Weight</th>
-      <th scope="col" class="text-right">Autonomy</th>
-      <th scope="col" class="text-right">Features</th>
-      <th scope="col" class="text-right">Experts</th>
+      <th scope="col" class="text-left">Email</th>
+      <th scope="col" class="text-left">Phone</th>
+      <th scope="col" class="text-left">Address</th>
+      <th scope="col" class="text-left">Notes</th>
+      <th scope="col" class="text-left">Price Range</th>
+      <th scope="col" class="text-left">Weight</th>
+      <th scope="col" class="text-left">Autonomy</th>
     </tr>
   </thead>
   <tbody>
@@ -24,18 +24,16 @@
       <th scope="row" class="text-right">
         <a [routerLink]="['/clients', client.id]">{{ client.id }}</a>
       </th>
-      <!-- <td class="text-center">
-        <span class="badge badge-pill" [ngClass]="getBadgeClass(robot)">
-          {{ robot.type.slice(0, 1) | titlecase }}
-        </span>
-      </td>
-      <td>{{ robot.brand.name }}</td>
-      <td>{{ robot.name }}</td>
-      <td class="text-right">{{ robot.price | currency: undefined:"symbol":"1.0-0" }}</td>
-      <td class="text-right text-nowrap">{{ robot.weight }} kg</td>
-      <td class="text-right text-nowrap">{{ robot.autonomy }} hours</td>
-      <td class="text-right">{{ robot.features.length }}</td>
-      <td class="text-right">{{ robot.experts.length }}</td> -->
+      <td>{{ client.name }}</td>
+      <td>{{ client.email }}</td>
+      <td>{{ client.phone }}</td>
+      <td>{{ client.address }}</td>
+      <td>{{ client.notes }}</td>
+      <td class="text-right">{{ client.generalInterest.price | currency: undefined:"symbol":"1.0-0" }}</td>
+      <td class="text-right text-nowrap">{{ client.generalInterest.weight }} kg</td>
+      <td class="text-right text-nowrap">{{ client.generalInterest.autonomy }} hours</td>
+      <td class="text-right">{{ client.generalInterest.features.length }}</td>
+      <td class="text-right">{{ client.generalInterest.experts.length }}</td>
     </tr>
   </tbody>
 </table>

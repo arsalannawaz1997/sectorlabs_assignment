@@ -14,9 +14,12 @@ export class ClientService {
   }
 
   public createClient(clientInfo) {
-    return this.http.post(`/api/clients/new`, clientInfo);
+    return this.http.post<any>(`/api/clients/create`, clientInfo);
   }
   public getBrands(filters = {}) {
-    return this.http.get("/api/clients/brands", { params: filters });
+    return this.http.get<any>("/api/clients/brands");
+  }
+  public buildClient(){
+    return this.http.get<any>("/api/clients/new");
   }
 }

@@ -22,6 +22,7 @@ export class ClientListComponent implements OnInit {
         this.clients = clients;
         this.isLoading = false;
         this.isError = false;
+        console.log(this.clients);
       },
       () => {
         this.clients = [];

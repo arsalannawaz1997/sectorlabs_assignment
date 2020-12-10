@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { ClientService } from "../client.service";
-import { flatMap } from "rxjs/operators";
 
 @Component({
   selector: "app-client-form",
@@ -15,20 +13,25 @@ export class ClientFormComponent implements OnInit {
 
   constructor(
     private readonly clientService: ClientService,
-    private readonly route: ActivatedRoute,
     ) {}
 
   ngOnInit(): void {
-    this.route.params
-      .pipe(flatMap((params) => this.clientService.getBrands(params)))
-      .subscribe(
-        (brands) => {
-          this.brands = brands;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+    this.clientService.getBrands().subscribe(
+      (brands) => {
+        this.brands = brands;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    this.clientService.buildClient().subscribe(
+      (client) => {
+        this.client = client;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   public onFormSubmit() {
     this.alerts = [];

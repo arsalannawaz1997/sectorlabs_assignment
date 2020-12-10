@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "assignedStaffMember",
         foreignKey: {
           name: "assignedStaffMemberId",
-          allowNull: false,
+          allowNull: true,
         },
       });
     };

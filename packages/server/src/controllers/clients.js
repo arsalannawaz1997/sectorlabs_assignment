@@ -28,7 +28,7 @@ router.get("/:id", async (request, response, next) => {
   }
 });
 
-router.post("/new", async (request, response, next) => {
+router.post("/create", async (request, response, next) => {
   try {
     const clientsService = new ClientsService(request.log, sequelize);
 
@@ -44,9 +44,21 @@ router.get("/brands", async (request, response, next) => {
   try {
     const clientsService = new ClientsService(request.log, sequelize);
 
-    const brands = await clientsService.getBrands(request.query);
+    const brands = await clientsService.getBrands();
 
     response.status(200).json(brands);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/new", async (request, response, next) => {
+  try {
+    const clientsService = new ClientsService(request.log, sequelize);
+
+    let client = await clientsService.new();
+
+    response.status(200).json(client);
   } catch (error) {
     next(error);
   }

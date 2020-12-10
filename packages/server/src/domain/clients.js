@@ -7,13 +7,14 @@ class ClientsService {
     async getBrands(filters = {}) {
       this.logger.info({ data: { filters } }, "Retrieving the list of all brands");
       const { Brand } = this.sequelize.models;
+      console.log("Yaban taba");
       return Brand.findAll();
     }
   
     async getList(filters = {}) {
       this.logger.info({ data: { filters } }, "Retrieving the list of clients");
   
-      const { Feature, StaffMember, Client } = this.sequelize.models;
+      const { Feature, StaffMember, GeneralInterest, Client } = this.sequelize.models;
   
       return Client.findAll({
         where: filters,
@@ -26,6 +27,10 @@ class ClientsService {
             model: Feature,
             as: "optionalFeature",
           },
+          {
+            model: GeneralInterest,
+            as: "generalInterest",
+          }
         ],
       });
     }
@@ -42,8 +47,14 @@ class ClientsService {
       this.logger.info({ data: clientInfo}, "Creating a client");
       const { Client } = this.sequelize.models;
       const client = await Client.create(clientInfo);
-      await client.save();
   
+      return client;
+    }
+
+    async new() {
+      this.logger.info("Initializing an empty client");
+      const { Client } = this.sequelize.models;
+      const client = await Client.build({});
       return client;
     }
   }
